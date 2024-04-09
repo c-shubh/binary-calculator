@@ -11,35 +11,39 @@ let btnMul = document.querySelector("#btnMul");
 let btnDiv = document.querySelector("#btnDiv");
 
 function display(str, append = true) {
-    if (append) {
-        toDisplay = toDisplay.concat(str);
-    } else {
-        toDisplay = str;
-    }
-    result.innerHTML = toDisplay;
+  if (append) {
+    toDisplay = toDisplay.concat(str);
+  } else {
+    toDisplay = str;
+  }
+  result.innerHTML = toDisplay;
 }
 
 function action(event) {
-    let btn = event.target || event.srcElement;
-    display(btn.innerHTML);
+  let btn = event.target || event.srcElement;
+  display(btn.innerHTML);
 }
 
 function clearDisplay() {
-    display("", (append = false));
+  display("", (append = false));
 }
 
 function evalResult() {
-    let sign = toDisplay.match(/[+\-*\/]/);
-    let [binNum1, binNum2] = toDisplay.split(sign);
+  let sign = toDisplay.match(/[+\-*\/]/);
+  let [binNum1, binNum2] = toDisplay.split(sign);
 
-    display(
-        new Number(eval(`${Number.parseInt(binNum1, 2)} ${sign} ${Number.parseInt(binNum2, 2)}`)).toString(2),
-        (append = false)
-    );
+  display(
+    new Number(
+      eval(
+        `${Number.parseInt(binNum1, 2)} ${sign} ${Number.parseInt(binNum2, 2)}`
+      )
+    ).toString(2),
+    (append = false)
+  );
 }
 
 for (let button of [btn0, btn1, btnSum, btnSub, btnMul, btnDiv]) {
-    button.onclick = action;
+  button.onclick = action;
 }
 
 btnClr.onclick = clearDisplay;
